@@ -1,0 +1,13 @@
+<% provide(:title, 'All quizzes') %>
+<h1>All quizzes</h1> 
+
+
+<%= link_to "Add new quiz", new_quiz_path, class: "btn " %>
+<hr>
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @quizzes %>
+</ul>
+
+<%= will_paginate %>

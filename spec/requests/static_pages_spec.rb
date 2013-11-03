@@ -53,5 +53,6 @@ describe "StaticPages" do
     click_link "Home"
     click_link "sign up now!"
     expect(page).to have_title(full_title('Sign up'))
+    should_not have_link('Quizzes')
   end
 end
