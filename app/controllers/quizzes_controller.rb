@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
   before_action :admin_user
 
   def index
-    @quizzes = Quiz.paginate(page: params[:page], :per_page => 10, :order => 'title ASC')
+    @quizzes = Quiz.order('title').paginate(page: params[:page], :per_page => 10)
   end
 
   def new

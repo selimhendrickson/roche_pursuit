@@ -4,6 +4,9 @@ describe "QuizPages" do
 
   subject { page }
 
+  before(:all) { 30.times { FactoryGirl.create(:quiz) } }
+  after(:all) { Quiz.delete_all }
+
   describe "index" do
     
     let(:admin) { FactoryGirl.create(:admin) }
@@ -15,8 +18,6 @@ describe "QuizPages" do
 
     describe "pagination" do
 
-      before(:all) { 30.times { FactoryGirl.create(:quiz) } }
-      after(:all) { Quiz.delete_all }
 
       it{ should have_selector('div.pagination') }
 
@@ -53,15 +54,22 @@ describe "QuizPages" do
 
     describe "as an admin user" do
       let(:admin) { FactoryGirl.create(:admin) }
+      let(:button) { "Add new quiz" }
 
       before do
         sign_in admin
         visit quizzes_path
       end
 
-      it { should have_link('Quizzes', href: quizzes_path )}
-
+      it { should have_link('Quizzes', href: quizzes_path) }
       it { should have_title('All quizzes') }
+      it { should have_selector(:link_or_button, button) }
+      it { should have_link('delete', href: quiz_path(Quiz.first)) }
+      it "should be able to delete a quiz" do
+        expect do
+          click_link('delete', match: :first)
+        end.to change(Quiz, :count).by(-1)
+      end
     end
   end
 end
