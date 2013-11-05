@@ -13,10 +13,24 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.create(quiz_params)
     if @quiz.save
-      flash[:success] = "Quiz creates!"
+      flash[:success] = "Quiz created!"
       redirect_to quizzes_path
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @quiz = Quiz.find(params[:id])
+  end
+
+  def update
+    @quiz = Quiz.find(params[:id])
+    if @quiz.update_attributes(quiz_params)
+      flash[:success] = "Quiz updated"
+      redirect_to quizzes_path
+    else
+      render 'edit'
     end
   end
 
