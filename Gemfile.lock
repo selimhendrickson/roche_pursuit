@@ -48,7 +48,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.2.0)
@@ -132,7 +132,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
-    spreadsheet (0.9.1)
+    spreadsheet (0.9.4)
       ruby-ole (>= 1.0)
     sprockets (2.10.0)
       hike (~> 1.2)

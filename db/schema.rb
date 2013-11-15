@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102165442) do
+ActiveRecord::Schema.define(version: 20131115162246) do
+
+  create_table "questions", force: true do |t|
+    t.string   "content"
+    t.string   "answer"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "quizzes", force: true do |t|
     t.string   "title"

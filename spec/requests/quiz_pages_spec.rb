@@ -19,7 +19,8 @@ describe "QuizPages" do
     describe "pagination" do
 
 
-      it{ should have_selector('div.pagination') }
+      it { should have_selector('div.pagination') }
+      it { should have_link('Add new quiz') }
 
       it "should list each quiz" do
         Quiz.paginate(page: 1).each do |quiz|
@@ -27,6 +28,21 @@ describe "QuizPages" do
         end
       end
     end
+  end
+  
+  describe "new" do
+    let(:admin) { FactoryGirl.create(:admin) }
+
+    before(:each) do
+      sign_in admin
+      visit new_quiz_path
+    end
+
+    it { should have_content(:title)}
+    it { should have_content("New Quiz")}
+    it { should have_field("quiz_title")}
+    it { should have_field("quiz_questions")}
+    it { should have_button("Create quiz")}
   end
 
   describe "authorization" do

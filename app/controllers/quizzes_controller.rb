@@ -13,6 +13,12 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.create(quiz_params)
     if @quiz.save
+      if questions_file[:file] 
+        file = questions_file[:file]
+        CSV.foreach(file.path, headers: true) do |row|
+          @quiz.questions.create! row.to_hash
+        end
+      end
       flash[:success] = "Quiz created!"
       redirect_to quizzes_path
     else
@@ -22,6 +28,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
+    @questions = @quiz.questions.paginate(page: params[:page])
   end
 
   def update
@@ -44,6 +51,10 @@ class QuizzesController < ApplicationController
    
     def quiz_params
       params.require(:quiz).permit(:title)
+    end 
+
+    def questions_file
+      params.require(:quiz).permit(:file)
     end 
     #Before filters
 
