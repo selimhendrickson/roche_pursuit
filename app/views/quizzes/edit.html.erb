@@ -8,19 +8,19 @@
 
       <%= f.label :title %>
       <%= f.text_field :title %>
-      
+
       <%= f.submit "Update quiz", class: "btn btn-large btn-primary" %>
-    
+
     <% end %>
   </div>
-  <hr>
-<ul class="users">
-    <% if @quiz.questions.any? %>
-      <h3>Questions (<%= @quiz.questions.count %>)</h3>
-      <ol class="microposts">
-        <%= render @questions %>
-      </ol>
-      <%= will_paginate @questions %>
-    <% end %>
-    </ul>
 </div>
+<hr>
+<ul class="users">
+  <% if @quiz.questions.any? %>
+    <h3>Questions (<%= @quiz.questions.count %>)</h3>
+    <ol class="microposts">
+      <%= render @questions %>
+    </ol>
+    <%= will_paginate @questions %>
+  <% end %>
+</ul>
