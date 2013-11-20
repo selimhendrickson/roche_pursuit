@@ -1,0 +1,10 @@
+<h1>
+  <%= @quiz.title %>
+</h1>
+
+<%= (session[:index] + 1).to_s + '.' + @question.content %>
+<%= @question.answer %>
+<%= form_tag '/answer' do %>
+  <%= text_field_tag 'answer' %>
+  <%= button_tag 'Answer' %>
+<% end %>
