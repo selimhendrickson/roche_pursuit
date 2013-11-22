@@ -9,6 +9,16 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, length: { minimum: 6 }
+  has_many :takes, foreign_key: "user_id", dependent: :destroy
+  has_many :quizzes, through: :takes
+
+  def taken?(quiz)
+    takes.find_by(quiz_id: quiz.id)
+  end
+
+  def take!(quiz)
+    takes.create!(quiz_id: quiz.id)
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

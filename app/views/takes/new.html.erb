@@ -1,10 +1,21 @@
+<%= javascript_include_tag "boot.js", "data-turbolinks-track" => true %>
 <h1>
   <%= @quiz.title %>
 </h1>
-
-<%= (session[:index] + 1).to_s + '.' + @question.content %>
-<%= @question.answer %>
-<%= form_tag '/answer' do %>
-  <%= text_field_tag 'answer' %>
-  <%= button_tag 'Answer' %>
-<% end %>
+<div class="row">
+  <aside class="span2">
+    <section>
+      <div id="timer"></div>
+  </section>
+  </aside>
+  <section>
+    <div id="question">
+      <%= (session[:index] + 1).to_s + '.' + @question.content %>
+      <%= @question.answer %>
+    </div>
+    <%= form_tag '/answer', :remote => true do %>
+      <%= text_field_tag 'answer' %>
+      <%= button_tag 'Answer' %>
+    <% end %>
+  </section>
+</div>
