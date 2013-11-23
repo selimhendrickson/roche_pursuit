@@ -1,10 +1,11 @@
 class TakesController < ApplicationController
 
   def index
+    @quizzes = Quiz.order('title').paginate(page: params[:page], :per_page => 10)
   end
 
   def new
-    @quiz = Quiz.find(:first)
+    @quiz = Quiz.find(params[:quiz_id])
     session[:quiz_id] = @quiz.id
     @question = @quiz.questions[0]
     session[:index] = 0

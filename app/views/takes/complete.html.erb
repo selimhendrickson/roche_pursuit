@@ -1,5 +1,24 @@
-<h1>
+<h1 class="center">
   Congratulations! Quiz complete..
 </h1>
-
-<%= session[:score] %>
+<div class="row">
+  <aside class="span2">
+    <section>
+        <%= case session[:score]
+        when (0..5)
+          image_tag("bee.jpg")
+        when (6..10)
+          image_tag("c3p0.jpg")
+        when (10..15)
+          image_tag("jedi_knight.jpg")
+        when (15..20)
+          image_tag("jedi_master.jpg")
+        end %>
+    </section>
+  </aside>
+  <section class="center">
+    <h3>
+      Your score is: <%= session[:score] %>
+    </h3>
+  </section>
+</div>

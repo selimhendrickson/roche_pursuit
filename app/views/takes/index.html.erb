@@ -1,5 +1,11 @@
 <h1>Try a quiz!</h1>
 
-<div class="center">
-  <%= link_to "Start now!", new_take_path, class: "btn btn-large btn-primary" %>
+<div>
+  <%= will_paginate @quizzes%>
+
+    <ul class="users">
+      <%= render partial: "takes/quiz", collection: @quizzes %>
+    </ul>
+
+  <%= will_paginate @quizzes %>
 </div>

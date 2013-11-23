@@ -5,9 +5,11 @@ $(document).ready(function() {
         fill: false,
         showPercentage: true,
         callback: function() {
+          if ( window.location.pathname == '/takes/new' ) {
             alert("Time up!");
             $('#timer').pietimer('reset');
             window.location.href = '/complete';
+          }
         }
     });
 });

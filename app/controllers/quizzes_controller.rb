@@ -15,9 +15,7 @@ class QuizzesController < ApplicationController
     if @quiz.save
       if questions_file[:file] 
         file = questions_file[:file]
-        CSV.foreach(file.path, headers: true) do |row|
-          @quiz.questions.create! row.to_hash
-        end
+        import(file)
       end
       flash[:success] = "Quiz created!"
       redirect_to quizzes_path
@@ -46,6 +44,27 @@ class QuizzesController < ApplicationController
     flash[:success] = "Quiz destroyed!"
     redirect_to quizzes_path
   end
+
+
+  def import(file)
+    spreadsheet = open_spreadsheet(file)
+    header = spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      @quiz.questions.create! row.to_hash
+    end
+  end
+
+
+  def open_spreadsheet(file)
+    case File.extname(file.original_filename)
+    when '.csv' then Roo::Csv.new(file.path, nil, :ignore)
+    when '.xls' then Roo::Excel.new(file.path, nil, :ignore)
+    when '.xlsx' then Roo::Excelx.new(file.path, nil, :ignore)
+    else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
 
   private
    
