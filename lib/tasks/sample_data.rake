@@ -20,7 +20,7 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
-    50.times do
+    5.times do
       title = Faker::Lorem.sentence(5)
       quiz = Quiz.create!(title: title)
       10.times do
