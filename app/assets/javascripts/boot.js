@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#timer').pietimer({
-        timerSeconds: 10,
+        timerSeconds: 90,
         color: '#234',
         fill: false,
         showPercentage: true,

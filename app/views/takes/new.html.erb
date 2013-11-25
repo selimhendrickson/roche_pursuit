@@ -11,7 +11,6 @@
   <section>
     <div id="question">
       <%= (session[:index] + 1).to_s + '.' + @question.content %>
-      <%= @question.answer %>
     </div>
     <%= form_tag '/answer', :remote => true do %>
       <%= text_field_tag 'answer' %>
