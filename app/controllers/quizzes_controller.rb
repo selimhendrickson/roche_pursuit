@@ -51,7 +51,11 @@ class QuizzesController < ApplicationController
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      @quiz.questions.create! row.to_hash
+      hash = row.to_hash
+      if hash["answer"].is_a? Float
+        hash["answer"] = hash["answer"].to_int
+      end
+      @quiz.questions.create! hash
     end
   end
 

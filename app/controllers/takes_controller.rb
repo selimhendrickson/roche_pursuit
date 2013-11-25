@@ -17,9 +17,11 @@ class TakesController < ApplicationController
       render :js => "window.location.href = ('#{takes_path}');"
     else
       @quiz = Quiz.find(session[:quiz_id])
-      if params[:answer].eql? @quiz.questions[session[:index]].answer
-        session[:score] += 1
-      end
+      @given_answer = params[:answer]
+      @given_answer.strip!
+      @answer = @quiz.questions[session[:index]].answer
+      @answer.strip!
+      if @answer.casecmp(@given_answer) == 0 then session[:score] += 1 end
       unless @quiz.questions.length == session[:index] + 1
         session[:index] = session[:index] + 1
         @question = @quiz.questions[session[:index]]
